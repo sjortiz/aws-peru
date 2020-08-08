@@ -9,7 +9,7 @@ Amplify.configure(awsconfig);
 async function getData() {
     API.graphql(graphqlOperation(listTodos)).then((evt) => {
         evt.data.listTodos.items.map((todo, i) => {
-            console.log(`<p>${todo.name} - ${todo.description}</p>`);
+            QueryResult.innerHTML += `<p>${todo.name} - ${todo.description}</p>`;
         });
     });
 }
@@ -22,6 +22,10 @@ async function createNewTodo() {
 
   return await API.graphql(graphqlOperation(createTodo, { input: todo }));
 }
+
+const MutationButton = document.getElementById("MutationEventButton");
+const MutationResult = document.getElementById("MutationResult");
+const QueryResult = document.getElementById("QueryResult");
 
 
 MutationButton.addEventListener("click", (evt) => {
